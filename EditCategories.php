@@ -34,11 +34,11 @@ if (isset($_POST['update_btn'])) {
     $name = $_POST['name'];
 
     // Use placeholders
-     $stmt = $conn->prepare("SELECT code FROM master_category WHERE code = ? AND user_id = ? ");
-    $stmt->bind_param("si", $code, $user_id);
+     $stmt = $conn->prepare("SELECT code FROM master_category WHERE code = ? AND user_id = ? AND id=? ");
+    $stmt->bind_param("sii", $code, $user_id,$category_id);
     $stmt->execute();
     $result = $stmt->get_result();
-
+//var_dump($result);
             if ($result->num_rows > 0) {
                 echo "<script type='text/javascript'> text='** Code already exit **';
                     document.getElementById('code').innerHTML = text;</script>";
