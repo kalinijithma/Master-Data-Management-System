@@ -1,0 +1,35 @@
+
+.brand-form {
+            width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+
+        }
+
+.brand-form h2 {
+            text-align: center;
+        }
+
+.brand-form label {
+            display: block;
+            margin-top: 10px;
+        }
+
+.brand-form input[type="text"],
+.brand-form select {
+           background-color: #eee;
+            border: none;
+            padding: 12px 15px;
+            margin: 8px 0;
+            width: 100%;
+        }
+
+
+.button{
+            padding-top: 40px;
+            background-color: navy;
+            color: white;
+            padding: 10px 10px;
+            letter-spacing: 1px;
+            width: 100px;
+        }

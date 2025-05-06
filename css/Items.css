@@ -1,0 +1,58 @@
+table {
+  width: 100%;
+  border-collapse: collapse; /* Collapse borders for a cleaner look */
+}
+
+th, td {
+  padding: 9px;
+  text-align: left;
+  border-bottom: 1px solid #ddd; /* Optional: Add a subtle bottom border to rows */
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #f2f2f2; /* Light gray for odd rows */
+}
+
+tbody tr:nth-child(even) {
+  background-color: #e0e0e0; /* Darker gray for even rows */
+}
+
+/* Optional: Style the header row */
+thead th {
+  background-color: #ccc; /* Example header background */
+  color: #333;
+}
+
+.edit-button{
+   background-color: blue;
+  color: white; 
+  padding: 8px 15px;
+  border: none;
+  margin: 0 30px; 
+}
+
+.delete-button{
+  background-color: black;
+  color: white; 
+  padding: 8px 15px;
+  border: none;
+  margin: 0 30px; 
+}
+
+.add-button {
+  border: none;
+    padding-top: 40px;
+    background-color: green;
+    color: white;
+    padding: 10px 10px;
+    letter-spacing: 1px;
+    width: 100px;
+    text-align: center; /* Ensures text is centered inside the button */
+    display: block; /* Makes the button a block element */
+    margin-left: auto; /* Pushes the button to the right */
+    margin-right: 10;
+}
+
+a{
+  text-decoration: none;
+}

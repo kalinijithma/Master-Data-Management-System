@@ -1,0 +1,57 @@
+ #div1 {
+           
+            top: 50%;
+            bottom: 50%;
+            left: 35%;
+            width: 600px;
+            height:900px;
+           position: relative;
+            
+        }
+
+#form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 50px;
+            height: 100%;
+            text-align: center;
+        }
+
+#name,#email,#password1,#password2,#admin {
+            background-color: #eee;
+            border: none;
+            padding: 12px 15px;
+            margin: 8px 0;
+            width: 100%;
+        }
+
+#button {
+            border-radius: 20px;
+            border: 1px solid #27ae60;
+            background-color: navy;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 10px 50px;
+            letter-spacing: 1px;
+            width: 300px;
+
+        }
+
+        .role-selection {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+.role-selection input[type="radio"] {
+    accent-color: #0055cc; /* color of selected radio */
+}
+
+.role-selection label {
+    font-size: 16px;
+    color: #333;
+}
+

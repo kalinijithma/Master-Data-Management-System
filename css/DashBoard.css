@@ -1,0 +1,91 @@
+.products {
+  padding-left: 250px;
+  padding-bottom: 40px;
+  padding-top: 40px;
+  background-color: #f9f9f9; 
+}
+
+.products-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px; 
+
+}
+
+.box {
+   background-color: #D3D3D3;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  height: 300px;
+  padding: 15px;
+  text-align: center;
+}
+h1{
+  color: navy;
+  text-align: center;
+}
+a {
+    text-decoration: none;
+}
+
+.box h2 {
+  font-size: 1.2em;
+  margin-top: 70px;
+  color: #333;
+  text-decoration: none;
+}
+
+.box h3 {
+  font-size: 0.9em;
+  margin-bottom: 70px;
+  color: #777;
+
+}
+
+.box-buttons{
+  display: flex;
+  justify-content: space-between; /* Distribute space between buttons */
+  margin-top: 100px;
+}
+
+.but {
+  color: white; /* Teal text */
+  padding: 8px 30px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9em;
+  flex-grow: 1; /* Allow buttons to grow and take equal space */
+  margin: 0 50px; /* Add some horizontal space between buttons */
+}
+
+#but1{
+    background-color:#0047AB ;
+}
+
+#but2{
+    background-color:black;
+}
+
+
+.add-button{
+    float: right;
+    margin: 40px;
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+}
+
+.log-out{
+  padding-right: 20px;
+  padding-top: 25px;
+  padding-left: 40px;
+  float: right;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
