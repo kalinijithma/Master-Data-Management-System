@@ -9,8 +9,6 @@ session_start();
 <body>
 	<div id="div1">
         <form action="" method="post" id="form">
-            
-
 
             <h1 style="color:#000080;" >Sign In</h1>
                 <span id = "username_msg" style="color:red"> </span>
@@ -52,7 +50,6 @@ if(isset($_POST['signIn'])){
      if(!empty($un) && !empty($pwd)) {
         $sql = "SELECT id,name FROM users WHERE email='$un' AND password='$pwd'";
         $result = $conn->query($sql);
-        
 
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();

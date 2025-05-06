@@ -28,7 +28,7 @@ $un = $_SESSION['email'];
             $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
             $offset = ($page - 1) * $limit;
 
-            // Count total brands for pagination
+
             $countStmt = $conn->prepare("SELECT COUNT(*) as total FROM master_brand mb JOIN users u ON mb.user_id = u.id WHERE u.email = ?");
             $countStmt->bind_param("s", $un);
             $countStmt->execute();
@@ -38,18 +38,12 @@ $un = $_SESSION['email'];
 
             $total_pages = ceil($total / $limit);
 
-            // Fetch brands for current page
-            // Fetch brands for current page with LIMIT and OFFSET
-$stmt = $conn->prepare("SELECT mb.*, u.id AS user_id 
-    FROM users u 
-    LEFT JOIN master_brand mb ON mb.user_id = u.id 
-    WHERE u.email = ? 
-    LIMIT ? OFFSET ?");
-$stmt->bind_param("sii", $un, $limit, $offset);
-$stmt->execute();
-$result = $stmt->get_result();
-
+            $stmt = $conn->prepare("SELECT mb.*, u.id AS user_id FROM users u LEFT JOIN master_brand mb ON mb.user_id = u.id WHERE u.email = ? LIMIT ? OFFSET ?");
+            $stmt->bind_param("sii", $un, $limit, $offset);
+            $stmt->execute();
+            $result = $stmt->get_result();
             //var_dump($result);
+
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $user_id = $row["user_id"];
@@ -79,17 +73,17 @@ $result = $stmt->get_result();
                 echo "<p>No brands found.</p>";
             }
 
-            // Handle deletion
+
                   if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['brand_id'])) {
     $brand_id = $_POST['brand_id'];
 
-    // First delete all items that belong to this brand
+
     $stmt = $conn->prepare("DELETE FROM master_item WHERE brand_id = ?");
     $stmt->bind_param("i", $brand_id);
     $stmt->execute();
     $stmt->close();
 
-    // Then delete the brand
+
     $stmt = $conn->prepare("DELETE FROM master_brand WHERE id = ?");
     $stmt->bind_param("i", $brand_id);
 

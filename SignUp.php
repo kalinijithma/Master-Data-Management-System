@@ -29,7 +29,6 @@ session_start();
             <input type="password" placeholder="Confirm Password" id="password2" name="password2">
 
             <br>
-             
             
             <button type="submit" value="Sign Up" id="button" name="signUp">Sign Up</button><br>
             
@@ -50,21 +49,21 @@ session_start();
        $email = $_POST['email'];
        $password=$_POST['password2'];
        $admin="0";
-        $_SESSION['email'] = $email;
+       $_SESSION['email'] = $email;
 
        $stmt = $conn->prepare("INSERT INTO users (name, email,password,is_admin) VALUES (?, ?, ?,?)");
-    $stmt->bind_param("sssi",$name, $email,$password,$admin);
+       $stmt->bind_param("sssi",$name, $email,$password,$admin);
 
-    if ($stmt->execute()) {
-         $stmt->close();
-        $conn->close();
-          header("Location: SignIn.php?success=1");
-        exit();
-    } else {
-       // echo "Error: " . $stmt->error;
-    }
+            if ($stmt->execute()) {
+                 $stmt->close();
+                $conn->close();
+                  header("Location: SignIn.php?success=1");
+                exit();
+            } else {
+               // echo "Error: " . $stmt->error;
+            }
 
-    $stmt->close();
+      $stmt->close();
 }
 $conn->close();
 ?>

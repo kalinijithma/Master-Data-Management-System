@@ -29,15 +29,15 @@ $_SESSION["category_id"]=$category_id;
     </tr>
   </thead>
   <tbody>
+    <h1>Items</h1>
      <?php
     
         include 'DataBaseConnection.php';
 
-            $limit = 10; // Items per page
+        $limit = 10; 
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $offset = ($page - 1) * $limit;
 
-        // Count total items
         $countQuery = $conn->prepare("SELECT COUNT(*) AS total FROM master_item WHERE brand_id = ? AND category_id = ? AND user_id = ?");
         $countQuery->bind_param("iii", $brand_id, $category_id, $user_id);
         $countQuery->execute();
@@ -48,9 +48,7 @@ $_SESSION["category_id"]=$category_id;
         $total_pages = ceil($total_items / $limit);
 
 
-
-
-         $stmt = $conn->prepare("SELECT * FROM master_item WHERE brand_id = ? AND category_id = ? AND user_id = ? LIMIT ?, ?");
+        $stmt = $conn->prepare("SELECT * FROM master_item WHERE brand_id = ? AND category_id = ? AND user_id = ? LIMIT ?, ?");
         $stmt->bind_param("iiiii", $brand_id, $category_id, $user_id, $offset, $limit);
         $stmt->execute();
         $result = $stmt->get_result();

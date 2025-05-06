@@ -37,36 +37,36 @@ if (isset($_POST['update_btn'])) {
 
     // Use placeholders
      $stmt = $conn->prepare("SELECT code FROM master_item WHERE code = ? AND user_id = ? AND category_id= ? AND brand_id=?");
-$stmt->bind_param("siii", $code, $user_id,$category_id, $brand_id);
-$stmt->execute();
-$result = $stmt->get_result();
+    $stmt->bind_param("siii", $code, $user_id,$category_id, $brand_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-if ($result->num_rows > 0) {
-        echo "<script type='text/javascript'> text='** Code already exit **';
-            document.getElementById('code').innerHTML = text;</script>";
-    } else{
+        if ($result->num_rows > 0) {
+                echo "<script type='text/javascript'> text='** Code already exit **';
+                    document.getElementById('code').innerHTML = text;</script>";
+            } else{
 
-    $stmt = $conn->prepare("UPDATE master_item SET code = ?, name = ? WHERE id = $item_id");
+            $stmt = $conn->prepare("UPDATE master_item SET code = ?, name = ? WHERE id = $item_id");
 
-    if ($stmt) {
-        $stmt->bind_param("ss", $code, $name);
+            if ($stmt) {
+                $stmt->bind_param("ss", $code, $name);
 
-        if ($stmt->execute()) {
-            $stmt->close();
+                if ($stmt->execute()) {
+                    $stmt->close();
+                    $conn->close();
+                    //header("Location: EditItems.php?success=1");
+                    exit();
+                } else {
+                    echo "Execute failed: " . $stmt->error;
+                }
+
+                $stmt->close();
+            } else {
+                echo "Prepare failed: " . $conn->error;
+            }
+
             $conn->close();
-            //header("Location: EditItems.php?success=1");
-            exit();
-        } else {
-            echo "Execute failed: " . $stmt->error;
         }
-
-        $stmt->close();
-    } else {
-        echo "Prepare failed: " . $conn->error;
-    }
-
-    $conn->close();
-}
 }
 ?>
 

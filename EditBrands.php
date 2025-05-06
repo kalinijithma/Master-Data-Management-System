@@ -32,36 +32,36 @@ if (isset($_POST['update_btn'])) {
     $code = $_POST['code'];
     $name = $_POST['name'];
 
-     $stmt = $conn->prepare("SELECT code FROM master_brand WHERE code = ? AND user_id = ? AND id != ?");
-$stmt->bind_param("sii", $code, $user_id, $brand_id);
-$stmt->execute();
-$result = $stmt->get_result();
+     $stmt = $conn->prepare("SELECT code FROM master_brand WHERE code = ? AND user_id = ? AND id = ?");
+     $stmt->bind_param("sii", $code, $user_id, $brand_id);
+     $stmt->execute();
+     $result = $stmt->get_result();
 
-if ($result->num_rows > 0) {
-        echo "<script type='text/javascript'> text='** Code already exit **';
-            document.getElementById('code').innerHTML = text;</script>";
-    } else{
+        if ($result->num_rows > 0) {
+                echo "<script type='text/javascript'> text='** Code already exit **';
+                    document.getElementById('code').innerHTML = text;</script>";
+            } else{
 
-    // Use placeholders
-    $stmt = $conn->prepare("UPDATE master_brand SET code = ?, name = ? WHERE id = ?");
-        if ($stmt) {
-            $stmt->bind_param("ssi", $code, $name, $brand_id);
-            if ($stmt->execute()) {
+            // Use placeholders
+            $stmt = $conn->prepare("UPDATE master_brand SET code = ?, name = ? WHERE id = ?");
+                if ($stmt) {
+                    $stmt->bind_param("ssi", $code, $name, $brand_id);
+                    if ($stmt->execute()) {
+                        $stmt->close();
+                        $conn->close();
+                        header("Location: DashBoard.php?success=1");
+                        exit();
+                } else {
+                    echo "Execute failed: " . $stmt->error;
+                }
+
                 $stmt->close();
-                $conn->close();
-                header("Location: DashBoard.php?success=1");
-                exit();
-        } else {
-            echo "Execute failed: " . $stmt->error;
+            } else {
+                echo "Prepare failed: " . $conn->error;
+            }
+
+            $conn->close();
         }
-
-        $stmt->close();
-    } else {
-        echo "Prepare failed: " . $conn->error;
-    }
-
-    $conn->close();
-}
 }
 ?>
 

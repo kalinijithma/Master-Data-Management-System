@@ -33,8 +33,8 @@ $category_id=$_SESSION['category_id'];
 
         <input type="submit" value="Create" class="button" name="add_new">
     </form>
-
 </body>
+
 <?php
      include 'DataBaseConnection.php';
      if (isset($_POST['add_new'])) {
@@ -44,28 +44,28 @@ $category_id=$_SESSION['category_id'];
 
     // Use placeholders
      $stmt = $conn->prepare("SELECT code FROM master_item WHERE code = ? AND user_id = ? AND category_id= ? AND brand_id=?");
-$stmt->bind_param("siii", $code, $user_id,$category_id, $brand_id);
-$stmt->execute();
-$result = $stmt->get_result();
+     $stmt->bind_param("siii", $code, $user_id,$category_id, $brand_id);
+     $stmt->execute();
+     $result = $stmt->get_result();
 
-if ($result->num_rows > 0) {
-        echo "<script type='text/javascript'> text='** Code already exit **';
-            document.getElementById('code').innerHTML = text;</script>";
-    } else{
-       $stmt = $conn->prepare("INSERT INTO master_item (brand_id,category_id,code, name, status,user_id) VALUES (?, ?, ?,?,?,?)");
-       $stmt->bind_param("iisssi", $brand_id, $category_id, $code, $name, $status,$user_id);
+        if ($result->num_rows > 0) {
+            echo "<script type='text/javascript'> text='** Code already exit **';
+                document.getElementById('code').innerHTML = text;</script>";
+        }else{
+           $stmt = $conn->prepare("INSERT INTO master_item (brand_id,category_id,code, name, status,user_id) VALUES (?, ?, ?,?,?,?)");
+           $stmt->bind_param("iisssi", $brand_id, $category_id, $code, $name, $status,$user_id);
 
-    if ($stmt->execute()) {
-         $stmt->close();
-        $conn->close();
-          header("Location: AddnewItem.php?success=1");
-        exit();
-    } else {
-       // echo "Error: " . $stmt->error;
-    }
+                if ($stmt->execute()) {
+                     $stmt->close();
+                    $conn->close();
+                      header("Location: AddnewItem.php?success=1");
+                    exit();
+                } else {
+                   // echo "Error: " . $stmt->error;
+                }
 
     $stmt->close();
-}
+    }
 }
 $conn->close();
 ?>

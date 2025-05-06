@@ -3,7 +3,7 @@ session_start();
 $user_id=$_SESSION['user_id'];
 $catagory_id=['brand_id'];
 
-echo $user_id;
+//echo $user_id;
 
 ?>
 <!DOCTYPE html>
@@ -14,7 +14,6 @@ echo $user_id;
      <link rel="stylesheet" href="css/AddItems.css">
 </head>
 <body>
-
     <form class="brand-form" action="" method="POST">
         <h2>Add New Catagory</h2>
 
@@ -33,14 +32,13 @@ echo $user_id;
 
         <input type="submit" value="Create" class="button" name="add_new">
     </form>
-
 </body>
+
 <?php
      include 'DataBaseConnection.php';
      if(isset($_POST['add_new']))
     {
    
-      
        $code = $_POST['code'];
        $name = $_POST['name'];
        $status = $_POST['status'];
@@ -57,18 +55,18 @@ echo $user_id;
         }else{
 
        $stmt = $conn->prepare("INSERT INTO master_category (code, name, status,user_id) VALUES (?, ?, ?,?)");
-    $stmt->bind_param("sssi", $code, $name, $status,$user_id);
+       $stmt->bind_param("sssi", $code, $name, $status,$user_id);
 
-    if ($stmt->execute()) {
-         $stmt->close();
-        $conn->close();
-          header("Location: DashBoard.php?success=1");
-        exit();
-    } else {
-     echo "Error: " . $stmt->error;
-    }
+            if ($stmt->execute()) {
+                 $stmt->close();
+                $conn->close();
+                  header("Location: DashBoard.php?success=1");
+                exit();
+            } else {
+             echo "Error: " . $stmt->error;
+            }
 
-    $stmt->close();
+      $stmt->close();
 }
 }
 $conn->close();

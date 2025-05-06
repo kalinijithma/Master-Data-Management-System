@@ -39,35 +39,34 @@ if (isset($_POST['update_btn'])) {
     $stmt->execute();
     $result = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
-        echo "<script type='text/javascript'> text='** Code already exit **';
-            document.getElementById('code').innerHTML = text;</script>";
-    } else{
+            if ($result->num_rows > 0) {
+                echo "<script type='text/javascript'> text='** Code already exit **';
+                    document.getElementById('code').innerHTML = text;</script>";
+            } else{
 
-    $stmt = $conn->prepare("UPDATE master_category SET code = ?, name = ? WHERE id = $category_id");
+            $stmt = $conn->prepare("UPDATE master_category SET code = ?, name = ? WHERE id = $category_id");
 
-    if ($stmt) {
-        $stmt->bind_param("ss", $code, $name);
+            if ($stmt) {
+                $stmt->bind_param("ss", $code, $name);
 
-        if ($stmt->execute()) {
-            $stmt->close();
+                if ($stmt->execute()) {
+                    $stmt->close();
+                    $conn->close();
+                    //header("Location: EditItems.php?success=1");
+                    exit();
+                } else {
+                    echo "Execute failed: " . $stmt->error;
+                }
+
+                $stmt->close();
+            } else {
+                echo "Prepare failed: " . $conn->error;
+            }
+
             $conn->close();
-            //header("Location: EditItems.php?success=1");
-            exit();
-        } else {
-            echo "Execute failed: " . $stmt->error;
         }
-
-        $stmt->close();
-    } else {
-        echo "Prepare failed: " . $conn->error;
-    }
-
-    $conn->close();
-}
 }
 ?>
 
 </body>
-
 </html>
